@@ -1,7 +1,7 @@
 {
-    "name": "webdashers-client",
+    "name": "gd-remake",
     "version": "1.0.0",
-    "description": "Web Dashers is a fan-made browser mod of the Geometry Dash Web Demo. It features the main levels, a built-in level creator, and a level search to play online levels. The project is actively in development, with more features and updates planned.",
+    "description": "GD Remake is a browser Geometry Dash remake with the classic main levels and a built-in level creator.",
     "scripts": {
         "start": "npx serve ."
     }

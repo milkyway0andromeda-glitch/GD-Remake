@@ -104,7 +104,22 @@ class ColorManager {
     this._colors[channelId] = { ...color };
   }
   reset() {
+    const toRgb = (value, fallback) => {
+      const hex = value === null || value === undefined || !Number.isFinite(Number(value))
+        ? fallback
+        : (Number(value) & 0xffffff);
+      return {
+        r: (hex >> 16) & 0xff,
+        g: (hex >> 8) & 0xff,
+        b: hex & 0xff
+      };
+    };
     this._colors = {
+      // Geometry Dash channels 1 and 2 are the player's primary and secondary
+      // colors. Without these defaults, block faces and outline layers fall
+      // back to white whenever a level has no explicit channel colors.
+      1: toRgb(window.mainColor, 0x04ff00),
+      2: toRgb(window.secondaryColor, 0x00fbff),
       [fs]: {
         r: 0,
         g: 102,

@@ -1783,6 +1783,24 @@ class LevelEditor {
         }
     }
 
+    // Decoration palette thumbnails should preview in the player's primary
+    // color. A number of old decoration sprites have baked-in green, white,
+    // or black pixels (and some have hard-coded child tints), so normal tint
+    // multiplication leaves their colors inconsistent. Fill tint preserves
+    // each sprite's alpha/shape while giving every layer the same player color.
+    if (objectDef.type === decoType) {
+        const playerColor = Number.isFinite(Number(window.mainColor))
+            ? (Number(window.mainColor) & 0xffffff)
+            : 0x04ff00;
+        for (const spr of sprites) {
+            if (typeof spr.setTintFill === "function") {
+                spr.setTintFill(playerColor);
+            } else {
+                spr.setTint(playerColor);
+            }
+        }
+    }
+
     if (!sprites.length) {
         preview.destroy();
         return null;

@@ -134,7 +134,7 @@ class MacroBot {
     this.frames = [];
     this.currentFrameState = null;
     this.meta = {
-      author: "Web Dashers",
+      author: "GD Remake",
       level: "",
       version: 2,
     };
@@ -1652,7 +1652,7 @@ this._menuUpdateLogBtn = this.add.image(screenWidth - 30 - 50, 33, "GJ_WebSheet"
     };
     this._exportGMD = (level) => {
         const encodedDesc = btoa(unescape(encodeURIComponent(level.description || "")));
-        const authorName = "Web Dashers";
+        const authorName = "GD Remake";
         const officialSong = level.songId < 0 ? Math.abs(level.songId) : 0;
         const customSong = level.songId > 0 ? level.songId : 0;
         const rawLevelData = this._decodeWebLevelStringForGMD(level.levelString);
@@ -4130,7 +4130,10 @@ this._menuUpdateLogBtn = this.add.image(screenWidth - 30 - 50, 33, "GJ_WebSheet"
     const arrowR = this.add.image(sw - 55, cy - 25, "GJ_GameSheet03", "navArrowBtn_001.png").setScrollFactor(0).setDepth(154).setScale(1.1).setFlipX(false).setInteractive();
     const allLevels = window.allLevels || [];
     const visibleLevels = allLevels.slice(0, 13);
-    const pageCount = visibleLevels.length + 1;
+    // The historical build ends at Electroman Adventures, so only show the
+    // available main levels. The old extra placeholder page broke the end of
+    // the level carousel after later levels were removed.
+    const pageCount = visibleLevels.length;
     let currentPageIndex = visibleLevels.findIndex(l => l[2] === window.currentlevel[2]);
     if (currentPageIndex < 0) currentPageIndex = 0;
     const isComingSoonPage = () => currentPageIndex >= visibleLevels.length;
@@ -6447,11 +6450,11 @@ _showwippopup() {
       0xaaddff - fun messages from me :)
       0xFF008E - pink dev entries
     */
+    // To edit the in-game update log, change these entries (text, color, scale).
     const updateEntries = [
-      { text: "Update Log", scale: 1, font: "goldFont" },
-      { text: "Sorry for the 10 hour downtime\ni forgot to change the proxy\nurl because i changed the\nsubdomain - rohanis0000", scale: 0.7, color: 0xaaddff },
-      { text: "To anyone who is wondering\nwhy online features don't work,\nthe worker is constantly being\nused and its request limit\nis hit daily in a short time\ndue to many users using\nthe online levels feature.\nThis has hopefully been\nfixed now with this update.\n- rohanis0000", scale: 0.7, color: 0xaaddff },
-      { text: "Added 2 new proxies to fall back\nto when ones request limit is\n hit to allow you to still\nbe able to use online features.", scale: 0.65 }
+      { text: "GD Remake Update Log", scale: 1, font: "goldFont" },
+      { text: "GD Remake is based on Web Dashers.\nMain levels currently end at\nElectroman Adventures.", scale: 0.7, color: 0xaaddff },
+      { text: "Fixed the main level carousel and\nblock outline colors. Deco previews\nnow use your primary player color.", scale: 0.7 }
     ]; 
     let yPos = 0;
     const lineItems = [];
@@ -9489,7 +9492,7 @@ _applyMirrorEffect() {
       window.open("https://docs.phaser.io/", "_blank");
     }, () => !this._helpclose);
     this._helplayer.add(phaserlogo);
-    this._helplayer.add(this.add.bitmapText(containerX, 440, "goldFont", "Web Dashers not associated with RobTop Games", 22).setOrigin(0.5, 0.5));
+    this._helplayer.add(this.add.bitmapText(containerX, 440, "goldFont", "GD Remake is not associated with RobTop Games", 22).setOrigin(0.5, 0.5));
 
     const _helpbuttonborder = this.textures.get("GJ_button01").source[0].width * 0.3;
     const _helpbtnh = 70;
