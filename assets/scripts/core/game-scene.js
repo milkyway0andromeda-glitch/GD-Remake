@@ -4170,7 +4170,10 @@ this._menuUpdateLogBtn = this.add.image(screenWidth - 30 - 50, 33, "GJ_WebSheet"
     const cardH = 185;
     const cardX = cx;
     const cardY = cy - 100;
-    const cardSlideContainer = this.add.container(0, 0).setScrollFactor(0).setDepth(152);
+    // Keep the complete level card above the selector background and decorative
+    // chrome. Phaser sorts a Container as one display object, so the depths on
+    // its children cannot raise them above objects outside of the Container.
+    const cardSlideContainer = this.add.container(0, 0).setScrollFactor(0).setDepth(160);
     const cardBounceContainer = this.add.container(cardX, cardY).setScrollFactor(0).setDepth(0);
     cardSlideContainer.add(cardBounceContainer);
     const cardContainer = cardSlideContainer;
